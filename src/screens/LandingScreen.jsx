@@ -1,5 +1,11 @@
+import { Box, Typography } from "@mui/material";
+
 const LandingScreen = () => {
-  return <div>LandingScreen</div>;
+  return (
+    <Box bgcolor="primary">
+      <Typography color="primary">azerty</Typography>
+    </Box>
+  );
 };
 
 export default LandingScreen;
