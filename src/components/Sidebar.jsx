@@ -1,96 +1,80 @@
+// import {
+//   AccountBox,
+//   Article,
+//   Group,
+//   Home,
+//   ModeNight,
+//   Person,
+//   Settings,
+//   Storefront,
+// } from "@mui/icons-material";
 import {
-  AccountBox,
-  Article,
-  Group,
-  Home,
-  ModeNight,
-  Person,
-  Settings,
-  Storefront,
-} from "@mui/icons-material";
-import {
+  Avatar,
   Box,
   List,
   ListItem,
+  ListItemAvatar,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Switch,
+  styled,
+  Divider
 } from "@mui/material";
 import React from "react";
+import theme from "../theme";
 
-const Sidebar = ({mode,setMode}) => {
+
+const Sidebar = () => {
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+    <>
+    <Box flex={1} p={2} sx={{ width: "300px", height: "90vh" }}>
       <Box position="fixed">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
-              <ListItemIcon>
-                <Home />
-              </ListItemIcon>
-              <ListItemText primary="Homepage" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Article />
-              </ListItemIcon>
-              <ListItemText primary="Pages" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Group />
-              </ListItemIcon>
-              <ListItemText primary="Groups" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Storefront />
-              </ListItemIcon>
-              <ListItemText primary="Marketplace" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Person />
-              </ListItemIcon>
-              <ListItemText primary="Friends" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Settings />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <AccountBox />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              <Switch onChange={e=>setMode(mode === "light" ? "dark" : "light")}/>
-            </ListItemButton>
-          </ListItem>
+        <List dense sx={{ width: '100%', maxWidth: 360, color : "black" }}>
+              <ListItem
+                  disablePadding
+                >
+                <ListItemButton>
+                  <ListItemAvatar>
+                  <Avatar>H</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="ManohySR" secondary="Jan 9, 2014" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem
+                disablePadding
+              >
+                <ListItemButton>
+                  <ListItemAvatar>
+                  <Avatar>H</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="ManohySR" secondary="Jan 9, 2014" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem
+                disablePadding
+              >
+                <ListItemButton>
+                  <ListItemAvatar>
+                  <Avatar>H</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="ManohySR" secondary="Jan 9, 2014" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem
+                disablePadding
+              >
+                <ListItemButton>
+                  <ListItemAvatar>
+                  <Avatar>H</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="ManohySR" secondary="Jan 9, 2014" />
+                </ListItemButton>
+              </ListItem>
         </List>
       </Box>
     </Box>
+    <Divider orientation="vertical" flexItem/>
+    </>
   );
 };
 

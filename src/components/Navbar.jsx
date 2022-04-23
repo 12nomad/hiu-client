@@ -1,13 +1,19 @@
+import SearchIcon from '@mui/icons-material/Search';
+
+
+
 import { Mail, Notifications, Pets } from "@mui/icons-material";
 import {
   AppBar,
   Avatar,
   Badge,
   Box,
+  CssBaseline,
   InputBase,
   Menu,
   MenuItem,
   styled,
+  alpha,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -18,12 +24,12 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: "space-between",
 });
 
-const Search = styled("div")(({ theme }) => ({
-  backgroundColor: "white",
-  padding: "0 10px",
-  borderRadius: theme.shape.borderRadius,
-  width: "40%",
-}));
+// const Search = styled("div")(({ theme }) => ({
+//   backgroundColor: "white",
+//   padding: "0 10px",
+//   borderRadius: theme.shape.borderRadius,
+//   width: "40%",
+// }));
 
 const Icons = styled(Box)(({ theme }) => ({
   display: "none",
@@ -42,22 +48,69 @@ const UserBox = styled(Box)(({ theme }) => ({
     display: "none",
   },
 }));
+
+//search component
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <AppBar position="sticky">
+    <>
+    <CssBaseline />
+    <AppBar position="sticky" elevation={0}>
       <StyledToolbar>
-        <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
-          LAMA DEV
+        <Typography variant="h5" sx={{ display: { xs: "none", sm: "block" } }}>
+          ESPA
         </Typography>
+        {/* logo */}
         <Pets sx={{ display: { xs: "block", sm: "none" } }} />
-        <Search>
-          <InputBase placeholder="search..." />
-        </Search>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
         <Icons>
-          <Badge badgeContent={4} color="error">
-            <Mail />
-          </Badge>
           <Badge badgeContent={2} color="error">
             <Notifications />
           </Badge>
@@ -94,6 +147,7 @@ const Navbar = () => {
         <MenuItem>Logout</MenuItem>
       </Menu>
     </AppBar>
+    </>
   );
 };
 
