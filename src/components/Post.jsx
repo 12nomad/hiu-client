@@ -10,21 +10,23 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
-import AudioFileIcon from "@mui/icons-material/AudioFile";
 import FolderIcon from "@mui/icons-material/Folder";
 import ImageIcon from "@mui/icons-material/Image";
-import FolderZipIcon from "@mui/icons-material/FolderZip";
-import CircleIcon from "@mui/icons-material/Circle";
-import ExtensionIcon from "@mui/icons-material/Extension";
-import ArticleIcon from "@mui/icons-material/Article";
 import axios from "axios";
-import { GoFileDirectory  } from "react-icons/go";
-import { BsFillImageFill, BsGearFill, BsArchiveFill, BsFillFileMusicFill } from "react-icons/bs";
+import { GoFileDirectory } from "react-icons/go";
+import {
+  BsFillImageFill,
+  BsGearFill,
+  BsArchiveFill,
+  BsFillFileMusicFill,
+} from "react-icons/bs";
 import { AiFillFile } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Post = ({ directories, getPath, path, getPrev }) => {
   const [file, setFile] = useState();
+
+  const inputRef = useRef();
 
   const handleClick = (path) => {
     getPath(path);
@@ -57,12 +59,12 @@ const Post = ({ directories, getPath, path, getPrev }) => {
   };
 
   const handleChange = (e) => {
-    setFile(e.target.file[0]);
+    setFile(e.target.files[0]);
   };
 
   useEffect(() => {
     const uploadData = async () => {
-      await axios.post("http://192.168.137.1:4000/files/upload", {
+      await axios.post("http://192.168.8.112:4000/files/upload", {
         file,
       });
     };
@@ -78,11 +80,20 @@ const Post = ({ directories, getPath, path, getPrev }) => {
       <Divider sx={{ marginTop: "1%" }} />
       <Box sx={{ marginTop: "2%", marginLeft: "2%" }}>
         <Box>
-          <input type="file" name="file" onChange={handleChange} />
+          <input
+            ref={inputRef}
+            type="file"
+            name="file"
+            onChange={handleChange}
+            style={{ opacity: 0 }}
+          />
           <Button
             variant="outlined"
             size="large"
             startIcon={<AddCircleOutlinedIcon />}
+            onClick={() => {
+              inputRef.current.click();
+            }}
           >
             Upload
           </Button>
@@ -147,28 +158,26 @@ const Post = ({ directories, getPath, path, getPrev }) => {
                     sx={{ display: "flex", alignItems: "center" }}
                   >
                     {directory.type === "dir" && (
-                      <GoFileDirectory color="grey" size="30px"
+                      <GoFileDirectory
+                        color="grey"
+                        size="30px"
                         onClick={() => handleClick(directory.name)}
                       />
                     )}
                     {directory.type === "audio" && (
-                      <BsFillFileMusicFill   color="pink" size="30px" />
+                      <BsFillFileMusicFill color="pink" size="30px" />
                     )}
-                    {directory.type === "image" && (
-                      <ImageIcon color="yellow" />
-                    )}
+                    {directory.type === "image" && <ImageIcon color="yellow" />}
                     {directory.type === "file-image" && (
                       <BsFillImageFill color="blue" size="30px" />
                     )}
                     {directory.type === "compressed" && (
-                      <BsArchiveFill  color="purple" size="30px" />
+                      <BsArchiveFill color="purple" size="30px" />
                     )}
                     {directory.type === "executable" && (
-                      <BsGearFill  color="red" size="30px" />
+                      <BsGearFill color="red" size="30px" />
                     )}
-                    {directory.type === "file" && (
-                      <AiFillFile  size="30px" />
-                    )}
+                    {directory.type === "file" && <AiFillFile size="30px" />}
                     {/* <InsertDriveFileOutlinedIcon sx={{ fontSize: "30px" }} /> */}
                     <ListItemText primary={directory.name} secondary="50Ko" />
                   </Stack>

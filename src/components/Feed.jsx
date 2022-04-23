@@ -8,8 +8,8 @@ const Feed = () => {
     {
       id: 66,
       type: "audio",
-      name: "Jojo"
-    }
+      name: "Jojo",
+    },
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [path, setPath] = useState(["D:/"]);
@@ -31,7 +31,7 @@ const Feed = () => {
   //   const getDirectories = async () => {
   //     setIsLoading(true);
   //     console.log(path);
-  //     const { data } = await axios.post("http://192.168.137.1:4000/files", {
+  //     const { data } = await axios.post("http://192.168.8.112:4000/files", {
   //       path: path.join("/"),
   //     });
 
