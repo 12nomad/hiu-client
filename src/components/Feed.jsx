@@ -7,11 +7,7 @@ const Feed = () => {
   const [directories, setDirectories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [path, setPath] = useState(["D:/"]);
-  const [isRoot, setIsRoot] = useState(true);
   const [lastPath, setLastPath] = useState([]);
-
-  console.log("Path", path);
-  console.log("Last path", lastPath);
 
   const getPath = useCallback((path) => {
     setPath((prev) => {
