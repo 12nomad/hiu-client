@@ -6,19 +6,13 @@ import Add from "../components/Add";
 import { useState } from "react";
 
 const DashboardScreen = () => {
-  const [mode, setMode] = useState("light");
 
-  // const darkTheme = createTheme({
-  //   palette: {
-  //     mode: mode,
-  //   },
-  // });
   return (
     <>
       <CssBaseline />
       <Box bgcolor={"background.default"} color={"text.primary"}>
         <Navbar />
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" spacing={3} justifyContent="space-between">
           <Sidebar />
           <Feed />
         </Stack>

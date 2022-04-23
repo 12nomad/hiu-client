@@ -2,7 +2,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 
-import { Mail, Notifications, Pets } from "@mui/icons-material";
+import { Notifications, Pets } from "@mui/icons-material";
 import {
   AppBar,
   Avatar,

@@ -15,13 +15,10 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
-  styled,
   Divider
 } from "@mui/material";
 import React from "react";
-import theme from "../theme";
 
 
 const Sidebar = () => {
