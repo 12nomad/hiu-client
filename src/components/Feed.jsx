@@ -60,6 +60,7 @@ const Feed = () => {
           />
         </>
       )}
+      <div></div>
     </Box>
   );
 };

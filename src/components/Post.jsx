@@ -1,66 +1,14 @@
-// import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-// import { Button, Divider, IconButton, ListItemText, Paper, Stack, Typography } from '@mui/material';
-// import { Box } from '@mui/system';
-// import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
-// import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOfflineOutlined';
-
-
-
-
-// const Post = () => {
-//   return (
-//     <>
-//     <Typography variant='h3' sx={{ marginLeft: "2%" }}>
-//       Room name
-//     </Typography>
-//     <Divider sx={{ marginTop: "1%" }} />
-//     <Box sx={{ marginTop: "2%", marginLeft: "2%" }}>
-//       <Box>
-//         <Button variant='outlined' size='large' startIcon={<AddCircleOutlinedIcon />}>
-//           Upload
-//         </Button>
-//       </Box>
-//       <Box  marginTop={5}>
-//         <Stack direction="row"  spacing={5} sx={{ marginTop: "1%", diplay: "flex", alignItems: "center" }}>
-//           <Box sx={{ width: "400px" }}>
-//             <Stack direction="row" spacing={1} sx={{ display: "flex", alignItems: "center" }}>
-//               <InsertDriveFileOutlinedIcon sx={{ fontSize: "30px" }}/>
-//                 <ListItemText primary="ManohySR" secondary="50Ko" />
-//             </Stack>
-//           </Box>
-//           <Box>
-//             <IconButton sx={{ paddingRight: "0" }}>
-//               <DownloadForOfflineOutlinedIcon sx={{ fontSize: "30px", color: "#011936" }}/>
-//             </IconButton>
-//           </Box>
-//           <Stack direction="row" spacing={6}>
-//             <Divider orientation="vertical" flexItem/>
-//             <Box>
-//               <Paper elevation={3} sx={{   
-//                 textAlign: 'center',
-//                 height: 60,
-//                 width: "300px",
-//                 lineHeight: '60px', }}>
-//                   File of ManohySR
-//               </Paper>
-//             </Box>
-//           </Stack>
-          
-
-//         </Stack>
-
-
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import {
   Button,
   Divider,
   IconButton,
   ListItemText,
+  Paper,
   Stack,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 import FolderIcon from "@mui/icons-material/Folder";
@@ -69,13 +17,45 @@ import FolderZipIcon from "@mui/icons-material/FolderZip";
 import CircleIcon from "@mui/icons-material/Circle";
 import ExtensionIcon from "@mui/icons-material/Extension";
 import ArticleIcon from "@mui/icons-material/Article";
+import axios from "axios";
 
-const Post = ({ directories }) => {
+const Post = ({ directories, getPath, path, getPrev }) => {
+  const handleClick = (path) => {
+    getPath(path);
+  };
+
+  const handlePrevClick = () => getPrev();
+
+  const handleDownload = (fichier) => {
+    console.log(path.join("/"));
+    console.log(fichier);
+    axios({
+      method: "post",
+      url: `http://192.168.137.1:4000/files/download`,
+      responseType: "blob",
+      headers: {},
+      data: {
+        path: path.join("/") + "/" + fichier,
+      },
+    })
+      .then((res) => {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", fichier);
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => alert(error));
+  };
+
   return (
     <>
-      <Typography variant="h3">Room name</Typography>
+      <Typography variant="h3" sx={{ marginLeft: "2%" }}>
+        Room name
+      </Typography>
       <Divider sx={{ marginTop: "1%" }} />
-      <Box sx={{ marginTop: "2%" }}>
+      <Box sx={{ marginTop: "2%", marginLeft: "2%" }}>
         <Box>
           {/* <input type="file" name="file" /> */}
           <Button
@@ -86,24 +66,70 @@ const Post = ({ directories }) => {
             Upload
           </Button>
         </Box>
-        <Box width="30%" marginTop={5}>
-          {directories.map((directory, idx) => {
+        <Box marginTop={5}>
+          {path.length !== 1 && (
+            <Stack
+              direction="row"
+              spacing={5}
+              sx={{ marginTop: "1%", diplay: "flex", alignItems: "center" }}
+            >
+              <Box sx={{ width: "400px" }}>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <FolderIcon
+                    sx={{ fontSize: "30px", cursor: "pointer" }}
+                    onClick={handlePrevClick}
+                  />
+                  <ListItemText primary=".." />
+                </Stack>
+              </Box>
+              <Box>
+                <IconButton>
+                  <DownloadForOfflineOutlinedIcon
+                    sx={{ fontSize: "30px", color: "#011936" }}
+                  />
+                </IconButton>
+              </Box>
+              <Stack direction="row" spacing={6}>
+                <Divider orientation="vertical" flexItem />
+                <Box>
+                  <Paper
+                    elevation={1}
+                    sx={{
+                      textAlign: "center",
+                      height: 60,
+                      width: "300px",
+                      lineHeight: "60px",
+                    }}
+                  >
+                    File of ManohySR
+                  </Paper>
+                </Box>
+              </Stack>
+            </Stack>
+          )}
+          {directories.map((directory) => {
             return (
               <Stack
-                key={idx}
+                key={directory.index}
                 direction="row"
-                width="50%"
                 spacing={5}
                 sx={{ marginTop: "1%", diplay: "flex", alignItems: "center" }}
-                >
-                  <Box>
+              >
+                <Box sx={{ width: "400px" }}>
                   <Stack
                     direction="row"
                     spacing={1}
                     sx={{ display: "flex", alignItems: "center" }}
                   >
                     {directory.type === "dir" && (
-                      <FolderIcon sx={{ fontSize: "30px" }} />
+                      <FolderIcon
+                        sx={{ fontSize: "30px", cursor: "pointer" }}
+                        onClick={() => handleClick(directory.name)}
+                      />
                     )}
                     {directory.type === "audio" && (
                       <AudioFileIcon sx={{ fontSize: "30px" }} />
@@ -128,20 +154,35 @@ const Post = ({ directories }) => {
                   </Stack>
                 </Box>
                 <Box>
-                  <Stack direction="row" spacing={1}>
-                    <IconButton>
-                      <DownloadForOfflineOutlinedIcon
-                        sx={{ fontSize: "30px" }}
-                      />
-                    </IconButton>
-
-                  </Stack>
+                  <IconButton onClick={() => handleDownload(directory?.name)}>
+                    <DownloadForOfflineOutlinedIcon
+                      sx={{ fontSize: "30px", color: "#011936" }}
+                    />
+                  </IconButton>
                 </Box>
+                <Stack direction="row" spacing={6}>
+                  <Divider orientation="vertical" flexItem />
+                  <Box>
+                    <Paper
+                      elevation={1}
+                      sx={{
+                        textAlign: "center",
+                        height: 60,
+                        width: "300px",
+                        lineHeight: "60px",
+                      }}
+                    >
+                      File of ManohySR
+                    </Paper>
+                  </Box>
+                </Stack>
               </Stack>
             );
           })}
         </Box>
-        <div></div>
       </Box>
-      </>)}
+    </>
+  );
+};
+
 export default Post;
