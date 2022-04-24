@@ -12,7 +12,7 @@ const StyledLandingScreen = styled.header`
   background-size: cover;
   background-repeat: no-repeat;
   color: #f8f8f8;
-  overflow-y: "hidden";
+  overflow: "hidden";
 
   .landing-left {
     text-align: left;

@@ -1,17 +1,28 @@
 import { Box, Stack, Skeleton } from "@mui/material";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
 
 const Feed = () => {
-  const [loading, setLoading] = useState(true);
+  const [directories, setDirectories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, [3000]);
+  useEffect(() => {
+    const getDirectories = async () => {
+      const { data } = await axios.post("http://192.168.8.112:4000/files", {
+        path: "D:/",
+      });
+
+      setDirectories(data);
+      setIsLoading(false);
+    };
+
+    getDirectories();
+  }, []);
 
   return (
     <Box flex={4} p={{ xs: 0, md: 2 }}>
-      {loading ? (
+      {isLoading ? (
         <Stack spacing={1}>
           <Skeleton variant="text" height={100} />
           <Skeleton variant="text" height={20} />
@@ -20,7 +31,7 @@ const Feed = () => {
         </Stack>
       ) : (
         <>
-          <Post />
+          <Post directories={directories} />
         </>
       )}
     </Box>
