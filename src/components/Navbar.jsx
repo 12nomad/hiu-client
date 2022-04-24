@@ -1,8 +1,7 @@
-import SearchIcon from '@mui/icons-material/Search';
-
-
+import SearchIcon from "@mui/icons-material/Search";
 
 import { Notifications, Pets } from "@mui/icons-material";
+import { HiOutlineSearchCircle } from "react-icons/hi";
 import {
   AppBar,
   Avatar,
@@ -50,41 +49,41 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 
 //search component
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    width: "auto",
   },
 }));
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
+  color: "inherit",
+  "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
   },
 }));
@@ -93,60 +92,66 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-    <CssBaseline />
-    <AppBar position="sticky" elevation={0}>
-      <StyledToolbar>
-        <Typography variant="h5" sx={{ display: { xs: "none", sm: "block" } }}>
-          ESPA
-        </Typography>
-        {/* logo */}
-        <Pets sx={{ display: { xs: "block", sm: "none" } }} />
+      <CssBaseline />
+      <AppBar position="sticky" elevation={0}>
+        <StyledToolbar>
+          <Typography
+            variant="h5"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              fontFamily: "ZCOOL KuaiLe",
+            }}
+          >
+            Alefaso_Any!
+          </Typography>
+          {/* logo */}
+          <Pets sx={{ display: { xs: "block", sm: "none" } }} />
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <HiOutlineSearchCircle size={25} />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
             />
           </Search>
-        <Icons>
-          <Badge badgeContent={2} color="error">
-            <Notifications />
-          </Badge>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            onClick={(e) => setOpen(true)}
-          />
-        </Icons>
-        <UserBox onClick={(e) => setOpen(true)}>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          />
-          <Typography variant="span">John</Typography>
-        </UserBox>
-      </StyledToolbar>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose={(e) => setOpen(false)}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
-      </Menu>
-    </AppBar>
+          <Icons>
+            <Badge badgeContent={2} color="error">
+              <Notifications />
+            </Badge>
+            <Avatar
+              sx={{ width: 30, height: 30 }}
+              src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              onClick={(e) => setOpen(true)}
+            />
+          </Icons>
+          <UserBox onClick={(e) => setOpen(true)}>
+            <Avatar
+              sx={{ width: 30, height: 30 }}
+              src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            />
+            <Typography variant="span">John</Typography>
+          </UserBox>
+        </StyledToolbar>
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          open={open}
+          onClose={(e) => setOpen(false)}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <MenuItem>Profile</MenuItem>
+          <MenuItem>My account</MenuItem>
+          <MenuItem>Logout</MenuItem>
+        </Menu>
+      </AppBar>
     </>
   );
 };

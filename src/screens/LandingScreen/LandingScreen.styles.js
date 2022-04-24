@@ -49,6 +49,14 @@ const StyledLandingScreen = styled.header`
       border-radius: 5px;
       font-size: 1.1rem;
       margin-top: 1.5rem;
+      cursor: pointer;
+      transition: 0.5s;
+      &:hover {
+        background-color: #2274a5;
+        box-shadow: 0 0 5px #2274a5, 0 0 25px #2274a5, 0 0 50px #2274a5,
+          0 0 200px #2274a5;
+        color: #fff;
+      }
     }
   }
 
