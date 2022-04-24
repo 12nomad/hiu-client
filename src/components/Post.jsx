@@ -18,6 +18,9 @@ import CircleIcon from "@mui/icons-material/Circle";
 import ExtensionIcon from "@mui/icons-material/Extension";
 import ArticleIcon from "@mui/icons-material/Article";
 import axios from "axios";
+import { GoFileDirectory  } from "react-icons/go";
+import { BsFillImageFill, BsGearFill, BsArchiveFill, BsFillFileMusicFill } from "react-icons/bs";
+import { AiFillFile } from "react-icons/ai";
 
 const Post = ({ directories, getPath, path, getPrev }) => {
   const handleClick = (path) => {
@@ -127,28 +130,27 @@ const Post = ({ directories, getPath, path, getPrev }) => {
                     sx={{ display: "flex", alignItems: "center" }}
                   >
                     {directory.type === "dir" && (
-                      <FolderIcon
-                        sx={{ fontSize: "30px", cursor: "pointer" }}
+                      <GoFileDirectory color="grey" size="30px"
                         onClick={() => handleClick(directory.name)}
                       />
                     )}
                     {directory.type === "audio" && (
-                      <AudioFileIcon sx={{ fontSize: "30px" }} />
+                      <BsFillFileMusicFill   color="pink" size="30px" />
                     )}
                     {directory.type === "image" && (
-                      <ImageIcon sx={{ fontSize: "30px" }} />
+                      <ImageIcon color="yellow" />
                     )}
                     {directory.type === "file-image" && (
-                      <CircleIcon sx={{ fontSize: "30px" }} />
+                      <BsFillImageFill color="blue" size="30px" />
                     )}
                     {directory.type === "compressed" && (
-                      <FolderZipIcon sx={{ fontSize: "30px" }} />
+                      <BsArchiveFill  color="purple" size="30px" />
                     )}
                     {directory.type === "executable" && (
-                      <ExtensionIcon sx={{ fontSize: "30px" }} />
+                      <BsGearFill  color="red" size="30px" />
                     )}
                     {directory.type === "file" && (
-                      <ArticleIcon sx={{ fontSize: "30px" }} />
+                      <AiFillFile  size="30px" />
                     )}
                     {/* <InsertDriveFileOutlinedIcon sx={{ fontSize: "30px" }} /> */}
                     <ListItemText primary={directory.name} secondary="50Ko" />
@@ -167,19 +169,6 @@ const Post = ({ directories, getPath, path, getPrev }) => {
                 </Box>
                 <Stack direction="row" spacing={6}>
                   <Divider orientation="vertical" flexItem />
-                  <Box>
-                    <Paper
-                      elevation={1}
-                      sx={{
-                        textAlign: "center",
-                        height: 60,
-                        width: "300px",
-                        lineHeight: "60px",
-                      }}
-                    >
-                      File of ManohySR
-                    </Paper>
-                  </Box>
                 </Stack>
               </Stack>
             );

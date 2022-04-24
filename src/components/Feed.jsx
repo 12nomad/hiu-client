@@ -4,14 +4,16 @@ import React, { useEffect, useState, useCallback } from "react";
 import Post from "./Post";
 
 const Feed = () => {
-  const [directories, setDirectories] = useState([]);
+  const [directories, setDirectories] = useState([
+    {
+      id: 66,
+      type: "audio",
+      name: "Jojo"
+    }
+  ]);
   const [isLoading, setIsLoading] = useState(false);
   const [path, setPath] = useState(["D:/"]);
-  const [isRoot, setIsRoot] = useState(true);
   const [lastPath, setLastPath] = useState([]);
-
-  console.log("Path", path);
-  console.log("Last path", lastPath);
 
   const getPath = useCallback((path) => {
     setPath((prev) => {
@@ -25,20 +27,20 @@ const Feed = () => {
     setPath([...copiedPath]);
   }, [path]);
 
-  useEffect(() => {
-    const getDirectories = async () => {
-      setIsLoading(true);
-      console.log(path);
-      const { data } = await axios.post("http://192.168.137.1:4000/files", {
-        path: path.join("/"),
-      });
+  // useEffect(() => {
+  //   const getDirectories = async () => {
+  //     setIsLoading(true);
+  //     console.log(path);
+  //     const { data } = await axios.post("http://192.168.137.1:4000/files", {
+  //       path: path.join("/"),
+  //     });
 
-      setDirectories(data);
-      setIsLoading(false);
-    };
+  //     setDirectories(data);
+  //     setIsLoading(false);
+  //   };
 
-    getDirectories();
-  }, [path]);
+  //   getDirectories();
+  // }, [path]);
 
   return (
     <Box flex={4} p={{ xs: 0, md: 2 }}>
@@ -60,7 +62,6 @@ const Feed = () => {
           />
         </>
       )}
-      <div></div>
     </Box>
   );
 };
