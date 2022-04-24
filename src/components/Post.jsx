@@ -26,7 +26,7 @@ const Post = ({ directories, getPath, path, getPrev }) => {
 
   const handlePrevClick = () => getPrev();
 
-  const handleDownload = (fichier) => {
+  const handleDownload = (fichier, type) => {
     console.log(path.join("/"));
     console.log(fichier);
     axios({
@@ -42,7 +42,8 @@ const Post = ({ directories, getPath, path, getPrev }) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", fichier);
+        const fic = type === "dir" ? fichier + ".zip" : fichier;
+        link.setAttribute("download", fic);
         document.body.appendChild(link);
         link.click();
       })
@@ -154,7 +155,11 @@ const Post = ({ directories, getPath, path, getPrev }) => {
                   </Stack>
                 </Box>
                 <Box>
-                  <IconButton onClick={() => handleDownload(directory?.name)}>
+                  <IconButton
+                    onClick={() =>
+                      handleDownload(directory?.name, directory?.type)
+                    }
+                  >
                     <DownloadForOfflineOutlinedIcon
                       sx={{ fontSize: "30px", color: "#011936" }}
                     />
