@@ -95,8 +95,8 @@ const Post = ({ directories }) => {
                 width="50%"
                 spacing={5}
                 sx={{ marginTop: "1%", diplay: "flex", alignItems: "center" }}
-              >
-                <Box>
+                >
+                  <Box>
                   <Stack
                     direction="row"
                     spacing={1}
@@ -142,7 +142,5 @@ const Post = ({ directories }) => {
           })}
         </Box>
       </Box>
-    </>
-  )}
-export default Post;
-
+      </>)}
+export default Post:

@@ -1,16 +1,36 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Post from "./Post";
 
 const Feed = () => {
   const [directories, setDirectories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [path, setPath] = useState(["D:/"]);
+  const [isRoot, setIsRoot] = useState(true);
+  const [lastPath, setLastPath] = useState([]);
+
+  console.log("Path", path);
+  console.log("Last path", lastPath);
+
+  const getPath = useCallback((path) => {
+    setPath((prev) => {
+      return [...prev, path];
+    });
+  }, []);
+
+  const getPrev = useCallback(() => {
+    const copiedPath = [...path];
+    copiedPath.pop();
+    setPath([...copiedPath]);
+  }, [path]);
 
   useEffect(() => {
     const getDirectories = async () => {
-      const { data } = await axios.post("http://192.168.8.112:4000/files", {
-        path: "D:/",
+      setIsLoading(true);
+      console.log(path);
+      const { data } = await axios.post("http://192.168.137.1:4000/files", {
+        path: path.join("/"),
       });
 
       setDirectories(data);
@@ -18,7 +38,7 @@ const Feed = () => {
     };
 
     getDirectories();
-  }, []);
+  }, [path]);
 
   return (
     <Box flex={4} p={{ xs: 0, md: 2 }}>
@@ -31,7 +51,13 @@ const Feed = () => {
         </Stack>
       ) : (
         <>
-          <Post directories={directories} />
+          <Post
+            directories={directories}
+            getPath={getPath}
+            lastPath={lastPath}
+            getPrev={getPrev}
+            path={path}
+          />
         </>
       )}
     </Box>
