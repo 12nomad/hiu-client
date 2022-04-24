@@ -141,6 +141,7 @@ const Post = ({ directories }) => {
             );
           })}
         </Box>
+        <div></div>
       </Box>
       </>)}
-export default Post:
+export default Post;
