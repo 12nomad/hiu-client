@@ -31,7 +31,7 @@ const Feed = () => {
   //   const getDirectories = async () => {
   //     setIsLoading(true);
   //     console.log(path);
-  //     const { data } = await axios.post("http://192.168.137.1:4000/files", {
+  //     const { data } = await axios.post("http://192.168.8.112/files", {
   //       path: path.join("/"),
   //     });
 

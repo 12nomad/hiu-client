@@ -22,8 +22,15 @@ import { GoFileDirectory  } from "react-icons/go";
 import { BsFillImageFill, BsGearFill, BsArchiveFill, BsFillFileMusicFill } from "react-icons/bs";
 import { AiFillFile } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import { FileUploader } from "react-drag-drop-files";
 
+
+const fileTypes = ["JPG", "PNG", "GIF"];
 const Post = ({ directories, getPath, path, getPrev }) => {
+
+
+
+
   const [file, setFile] = useState();
 
   const handleClick = (path) => {
@@ -37,7 +44,7 @@ const Post = ({ directories, getPath, path, getPrev }) => {
     console.log(fichier);
     axios({
       method: "post",
-      url: `http://192.168.137.1:4000/files/download`,
+      url: `http://192.168.8.112:4000/files/download`,
       responseType: "blob",
       headers: {},
       data: {
@@ -56,8 +63,8 @@ const Post = ({ directories, getPath, path, getPrev }) => {
       .catch((error) => alert(error));
   };
 
-  const handleChange = (e) => {
-    setFile(e.target.file[0]);
+  const handleChange = (file) => {
+    setFile(file);
   };
 
   useEffect(() => {
@@ -78,14 +85,15 @@ const Post = ({ directories, getPath, path, getPrev }) => {
       <Divider sx={{ marginTop: "1%" }} />
       <Box sx={{ marginTop: "2%", marginLeft: "2%" }}>
         <Box>
-          <input type="file" name="file" onChange={handleChange} />
+          {/* <input type="file" name="file" onChange={handleChange} />
           <Button
             variant="outlined"
             size="large"
             startIcon={<AddCircleOutlinedIcon />}
           >
             Upload
-          </Button>
+          </Button> */}
+          <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
         </Box>
         <Box marginTop={5}>
           {path.length !== 1 && (
