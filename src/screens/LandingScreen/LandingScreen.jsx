@@ -10,10 +10,7 @@ const StyledLanding = () => {
 
         <div className="landing-hero">
           <h2>Tairo mba omeo!</h2>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-            dolore aliquam laborum?
-          </p>
+          <p>"Sambatra kokoa ny manome noho ny mandray"</p>
           <Link to="/dashboard">
             <button type="button" className="landing-button">
               Eny ary...

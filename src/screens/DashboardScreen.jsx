@@ -6,12 +6,6 @@ import Add from "../components/Add";
 import { useEffect, useRef, useState } from "react";
 
 const DashboardScreen = () => {
-  const boxRef = useRef();
-
-  const handleScroll = () => {
-    boxRef.current.scrollIntoView();
-  };
-
   return (
     <>
       <CssBaseline />
@@ -22,8 +16,6 @@ const DashboardScreen = () => {
           <Sidebar />
           <Feed />
         </Stack>
-        <Add onClick={handleScroll} />
-        <Add />
       </Box>
     </>
   );

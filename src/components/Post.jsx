@@ -26,7 +26,7 @@ import { AiFillFile } from "react-icons/ai";
 import { useEffect, useState, useRef } from "react";
 import { FileUploader } from "react-drag-drop-files";
 
-const fileTypes = ["JPG", "PNG", "GIF"];
+const fileTypes = ["JPG", "PNG", "DOCX", "PDF", "MP4", "MP3", "RAR"];
 
 const Post = ({ directories, getPath, path, getPrev }) => {
   const [file, setFile] = useState();
@@ -43,7 +43,7 @@ const Post = ({ directories, getPath, path, getPrev }) => {
   const handleDownload = (fichier, type) => {
     axios({
       method: "post",
-      url: `http://192.168.8.112:4000/files/download`,
+      url: `http://192.168.137.1:4000/files/download`,
       responseType: "blob",
       headers: {},
       data: {
@@ -74,7 +74,7 @@ const Post = ({ directories, getPath, path, getPrev }) => {
     formData.append("file", file);
     axios({
       method: "post",
-      url: "http://192.168.8.112:4000/files/upload",
+      url: "http://192.168.137.1:4000/files/upload",
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",

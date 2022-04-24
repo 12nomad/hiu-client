@@ -36,7 +36,7 @@ const Sidebar = () => {
     const getHost = async () => {
       try {
         setIsLoading(true);
-        const { data } = await axios.get("http://192.168.8.112:4000/os");
+        const { data } = await axios.get("http://192.168.137.1:4000/os");
         setHost(data);
         setIsLoading(false);
       } catch (error) {
@@ -85,9 +85,9 @@ const Sidebar = () => {
             </Box>
           </List>
         </Box>
-        <Paper sx={{ position: "absolute", bottom: 2, mb: 3, ml: 2 }}>
+        <Paper sx={{ position: "fixed", bottom: 2, mb: 3, left: 80 }}>
           <Box>
-            <Typography sx={{ p: 4 }}>TIPS</Typography>
+            <Typography sx={{ p: 4 }}>Made with ❤ & 😴</Typography>
           </Box>
         </Paper>
       </Box>
