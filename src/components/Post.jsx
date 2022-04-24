@@ -21,8 +21,11 @@ import axios from "axios";
 import { GoFileDirectory  } from "react-icons/go";
 import { BsFillImageFill, BsGearFill, BsArchiveFill, BsFillFileMusicFill } from "react-icons/bs";
 import { AiFillFile } from "react-icons/ai";
+import { useEffect, useState } from "react";
 
 const Post = ({ directories, getPath, path, getPrev }) => {
+  const [file, setFile] = useState();
+
   const handleClick = (path) => {
     getPath(path);
   };
@@ -53,6 +56,20 @@ const Post = ({ directories, getPath, path, getPrev }) => {
       .catch((error) => alert(error));
   };
 
+  const handleChange = (e) => {
+    setFile(e.target.file[0]);
+  };
+
+  useEffect(() => {
+    const uploadData = async () => {
+      await axios.post("http://192.168.137.1:4000/files/upload", {
+        file,
+      });
+    };
+
+    uploadData();
+  }, [file]);
+
   return (
     <>
       <Typography variant="h3" sx={{ marginLeft: "2%" }}>
@@ -61,7 +78,7 @@ const Post = ({ directories, getPath, path, getPrev }) => {
       <Divider sx={{ marginTop: "1%" }} />
       <Box sx={{ marginTop: "2%", marginLeft: "2%" }}>
         <Box>
-          {/* <input type="file" name="file" /> */}
+          <input type="file" name="file" onChange={handleChange} />
           <Button
             variant="outlined"
             size="large"
@@ -75,7 +92,7 @@ const Post = ({ directories, getPath, path, getPrev }) => {
             <Stack
               direction="row"
               spacing={5}
-              sx={{ marginTop: "1%", diplay: "flex", alignItems: "center" }}
+              sx={{ marginTop: "1%", display: "flex", alignItems: "center" }}
             >
               <Box sx={{ width: "400px" }}>
                 <Stack
